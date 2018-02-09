@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Library</title>
+</head>
+<body>
+{% from "_helpers.html" import render_field %}
+<form method="POST" action="{{ url_for('search') }}">
+    {{ render_field(search_form.query) }}
+    {{ render_field(search_form.email) }}
+    <input type="submit" value="Search">
+</form>
+</body>
+</html>
