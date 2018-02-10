@@ -1,9 +1,10 @@
 from flask import request, redirect
 from flask.views import View, MethodView
 from flask.templating import render_template
+from lxml.etree import XMLSyntaxError
 from .forms import BookSearchForm
 from .jobs import Job
-from .jobs.jobs import search_books_then_reply
+from .jobs.jobs import search_books_then_reply, parse_book
 
 class IndexView(View):
 
@@ -31,3 +32,18 @@ class SearchView(MethodView):
                 search_form.email.data)
         else:
             return self.get(search_form)
+
+
+class BookUploadView(MethodView):
+
+    def get(self):
+        return render_template('upload.html')
+
+    def post(self):
+        if 'book' not in request.files:
+            return "Error: no file"
+
+        file = request.files['book']
+        parse_book(file)
+
+        return "Book has been uploaded"

@@ -1,6 +1,7 @@
-from .views import IndexView, SearchView
+from . import views
 
 urlpatterns = {
-    '/': IndexView.as_view('index'),
-    '/search/': SearchView.as_view('search'),
+    '/': views.IndexView.as_view('index'),
+    '/search/': views.SearchView.as_view('search'),
+    '/upload/': views.BookUploadView.as_view('upload'),
 }
